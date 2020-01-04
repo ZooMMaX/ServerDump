@@ -1,6 +1,6 @@
 public class Main {
-    public static final int PORT_WORK = 9000;
-    public static final int PORT_STOP = 9001;
+    public static final int PORT_WORK = 443;
+    public static final int PORT_STOP = 8443;
 
     public static void main(String[] args) {
         MultiThreadedServer server = new MultiThreadedServer(PORT_WORK);
