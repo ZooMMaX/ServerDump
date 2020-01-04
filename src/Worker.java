@@ -16,12 +16,34 @@ public class Worker implements Runnable {
         try {
             InputStream input  = clientSocket.getInputStream();
             OutputStream output = clientSocket.getOutputStream();
-            output.write("Connected\n".getBytes());
+            PrintWriter out = new PrintWriter(output, true);
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            while (!reader.readLine().equals("quit")) {
-
+            //ByteArrayInputStream in = new ByteArrayInputStream(clientSocket.getInputStream().readAllBytes());
+            /*while (reader.readLine().equals("quit")) {
+                //byte in[] = new byte[reader.read()];
+                // if (in[0] == 0xFF) {
+                out.write("close connect\n".getBytes());
+                out.flush();
+                clientSocket.close();
+            }*/
+                //}else
+            //out.write("connected\n".getBytes());
+            //out.flush();
+            while (reader.readLine().equals("quit") == false) {
+                String com1 = reader.readLine();
+                if (com1.equals("a")){
+                    String com2 = reader.readLine();
+                    if (com2.equals("1")){
+                        out.println("command a1");
+                    }
+                    if (com2.equals("2")){
+                        out.println("command a2");
+                    }
+                }
             }
-            output.write("Disconnected\n".getBytes());
+                //}
+            //}
+            out.println("Disconnected");
             System.out.println("stop signal received, stopping connect");
             clientSocket.close();
         } catch (Exception e) {
