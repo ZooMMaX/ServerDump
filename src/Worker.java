@@ -143,6 +143,40 @@ public class Worker implements Runnable {
                             fWriter.write(dump);
                             fWriter.close();
                         }
+                        if (com2.equals("Del")){
+                            oup("del");
+                            String login = reader.readLine();
+                            oup("login: " + login);
+                            String numcard = reader.readLine();
+                            oup("ncard: " + numcard);
+                            String dumpname = reader.readLine();
+                            oup("dname :" + dumpname);
+                            File a = new File("dumpBase/" + login + "/" + numcard);
+                            if (!a.exists()){
+                                out.println("error");
+                                clientSocket.close();
+                            }
+                            File aa = new File("dumpBase/" + login + "/" + numcard + "/" + dumpname);
+                            if (!aa.exists()){
+                                out.println("error");
+                                clientSocket.close();
+                            }else {
+                                if (aa.delete()){
+                                    String[] lst = a.list();
+                                    assert lst != null;
+                                    int ii = 0;
+                                    StringBuilder o = new StringBuilder();
+                                    for (String s : lst) {
+                                        ii++;
+                                        o.append(s).append(";");
+                                        if (ii == lst.length) {
+                                            out.println(Integer.toString(ii) + ";" + o);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
                     }
                 }
             }
