@@ -1,7 +1,6 @@
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
 
 
 public class Worker implements Runnable {
@@ -164,6 +163,22 @@ public class Worker implements Runnable {
                                 if (aa.delete()){
                                     String[] lst = a.list();
                                     assert lst != null;
+                                    if (lst.length == 0){
+                                        if (a.delete()){
+                                            f = new File("dumpBase/" + login);
+                                            String[] lst2 = f.list();
+                                            StringBuilder o = new StringBuilder();
+                                            assert lst2 != null;
+                                            int ii = 0;
+                                            for (String s : lst2) {
+                                                ii++;
+                                                o.append(s).append(";");
+                                                if (ii == lst2.length) {
+                                                    out.println(Integer.toString(ii) + ";" + o);
+                                                }
+                                            }
+                                        }
+                                    }
                                     int ii = 0;
                                     StringBuilder o = new StringBuilder();
                                     for (String s : lst) {
