@@ -115,26 +115,26 @@ public class Worker implements Runnable {
                             File a = new File("dumpBase/" + login + "/" + numcard);
                             if (!a.exists()) {
                                 if (a.mkdir()) {
-                                    out.println("dir create");
+                                    oup("dir create");
                                 } else {
                                     out.println("dir ncreate");
                                     clientSocket.close();
                                 }
                             } else {
-                                out.println("dir exists");
+                                oup("dir exists");
                             }
                             String dumpname = reader.readLine();
                             oup("dname " + dumpname);
                             File aa = new File("dumpBase/" + login + "/" + numcard + "/" + dumpname);
                             if (!aa.exists()) {
                                 if (aa.createNewFile()) {
-                                    out.println("dumpfile create");
+                                    oup("dumpfile create");
                                 } else {
                                     out.println("dumpfile ncreate");
                                     clientSocket.close();
                                 }
                             } else {
-                                out.println("dumpfile exists");
+                                oup("dumpfile exists");
                             }
                             String dump = reader.readLine();
                             oup("dump " + dump);
